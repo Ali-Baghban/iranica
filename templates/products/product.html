@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+محصول : {% if product %} {{ product.title }}{% endif %}
+{% endblock title %}
+{% block content %}
+<!-- Hero Section
+    ====================================== -->
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/9.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--heading">
+                                <h1>{% if product %} {{ product.title }}{% endif %}</h1>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li><a href="{% url 'products' %}">فروشگاه آنلاین</a></li>
+                            <li class="active"> محصول</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- Menu Grid
+    ============================================= -->
+    {% if product %} 
+    <section id="menuGrid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card text-center">
+                        <div class="card-header">
+                                   گارانتی اصالت و سلامت فیزیکی محصول
+                        </div>
+
+                        <hr>
+                        <br>
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.title }}</h5>
+                            <form method='POST' action="{% url 'card' %}">
+                            {% csrf_token %}
+                                <div class="slidecontainer" style="width: 50% ; margin: 0 auto ; text-align: center">
+                                    <input type="hidden" value="{{ product.id }}" name='item_id' >
+                                    <input type="range" class="custom-range" min="1" max="50" value="1"  id="myRange" name='count'>
+                                    <p class=""> تعداد : <span id="demo" style="color: #0b0b0b"></span> عدد</p>
+                                </div>
+                                <hr class="blue_line mt10 mb10"/>
+                                <script>
+                                    var slider = document.getElementById("myRange");
+                                    var output = document.getElementById("demo");
+                                    output.innerHTML = slider.value;
+
+                                    slider.oninput = function() {
+                                        output.innerHTML = this.value;
+                                    }
+                                </script>
+                                <input type="submit" name='add' class="btn btn-danger" style="border-radius: 7px" value='افزودن به سبد خرید' />
+                            </form>
+
+                        </div>
+                       
+                    </div>
+                    <br>
+                    <h6>{% if product.offer  %}<img src="https://img.icons8.com/color/48/000000/discount.png">&nbsp;&nbsp;&nbsp;{{ product.discount }} درصد تخفیف در خرید</h6>{% endif %}
+                    <h5><img src="https://img.icons8.com/color/48/000000/low-price-euro.png">&nbsp;&nbsp;&nbsp;قیمت : {{ product.price }} تومان       &nbsp;&nbsp;&nbsp;</h5>
+                    <h6><img src="https://img.icons8.com/nolan/48/check-file.png">&nbsp;&nbsp;&nbsp;{{ product.sub_title }}</h6>
+                    <p><img src="https://img.icons8.com/dotty/48/000000/align-cell-content-left.png">&nbsp;&nbsp;&nbsp;{{ product.caption }}.</p>
+
+                </div>
+                <div class="col-lg-6">
+                        <div class="dish-panel">
+                            <div class="dish--img">
+                                    <div class="divider--shape-left"></div>
+                                    <img src="{{ product.image_main.url }}" alt=""  style="width: 100%; border-radius: 5px" >
+                                    <div class="dish--overlay">
+                                        <a class="dish-popup" data-toggle="modal" data-target="#maindetail"><i class="fa fa-search-plus"></i></a>
+                                        <div class="modal fade" tabindex="-1" role="dialog" id="maindetail">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                                                        <div class="row reservation">
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <div class="popup--img">
+                                                                    <img src="{{ product.image_main.url }}" alt="popup">
+                                                                    <div class="img-popup-overlay">
+                                                                        <div class="popup--price">{{ product.price }} تومان</div>
+                                                                        <h3 class="popup--title">{{ product.title }}</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- .col-md-12 end -->
+                                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                                <div class="content-popup">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .row end -->
+
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+                                        <!-- /.modal -->
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="row">
+                {% if product.image_1 %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <div class="dish-panel">
+                            <div class="dish--img">
+                                <div class="divider--shape-left"></div>
+                                <img src="{{ product.image_1.url }}" alt=""  style="width: 100%; border-radius: 5px" >
+                                <div class="dish--overlay">
+                                    <a class="dish-popup" data-toggle="modal" data-target="#maindetail1"><i class="fa fa-search-plus"></i></a>
+                                    <div class="modal fade" tabindex="-1" role="dialog" id="maindetail1">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                                                    <div class="row reservation">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="popup--img">
+                                                                <img src="{{ product.image_1.url }}" alt="">
+                                                                <div class="img-popup-overlay">
+                                                                    <div class="popup--price">{{ product.price }} تومان</div>
+                                                                        <h3 class="popup--title">{{ product.title }}</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .col-md-12 end -->
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="content-popup">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .row end -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if product.image_2 %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <div class="dish-panel">
+                            <div class="dish--img">
+                                <div class="divider--shape-left"></div>
+                                <img src="{{ product.image_2.url }}" alt="dish img"  style="width: 100%; border-radius: 5px" >
+                                <div class="dish--overlay">
+                                    <a class="dish-popup" data-toggle="modal" data-target="#maindetail2"><i class="fa fa-search-plus"></i></a>
+                                    <div class="modal fade" tabindex="-1" role="dialog" id="maindetail2">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                                                    <div class="row reservation">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="popup--img">
+                                                                <img src="{{ product.image_2.url }}" alt="">
+                                                                <div class="img-popup-overlay">
+                                                                    <div class="popup--price">{{ product.price }} تومان</div>
+                                                                    <h3 class="popup--title">{{ product.title }}</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .col-md-12 end -->
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="content-popup">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .row end -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if product.image_3 %}
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+                        <div class="dish-panel">
+                            <div class="dish--img">
+                                <div class="divider--shape-left"></div>
+                                <img src="{{ product.image_3.url }}" alt="dish img"  style="width: 100%; border-radius: 5px" >
+                                <div class="dish--overlay">
+                                    <a class="dish-popup" data-toggle="modal" data-target="#maindetail6"><i class="fa fa-search-plus"></i></a>
+                                    <div class="modal fade" tabindex="-1" role="dialog" id="maindetail6">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+                                                    <div class="row reservation">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="popup--img">
+                                                                <img src="{{ product.image_3.url }}" alt="">
+                                                                <div class="img-popup-overlay">
+                                                                    <div class="popup--price">{{ product.price }} تومان</div>
+                                                                    <h3 class="popup--title">{{ product.title }}</h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- .col-md-12 end -->
+                                                        <div class="col-xs-12 col-sm-12 col-md-12">
+                                                            <div class="content-popup">
+                                                                <p></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- .row end -->
+
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <!-- /.modal -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+
+                <!-- .col-md-8 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container-fluid pr-0 pl-0 tabs">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+
+                    <!-- Menu #6
+    ============================================= -->
+
+
+    <!-- Blog Carousel
+    ============================================= -->
+    <section id="blog" class="blog blog-carousel pb-100">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                    <div class="heading heading-1 mb-50 text--center">
+                        <p class="heading--subtitle">محصولات مشابه</p>
+                        <div class="divider--shape-4"></div>
+                    </div>
+                </div>
+                <!-- .col-md-8 end -->
+            </div>
+            <!-- .row end -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="carousel" data-slide="3" data-slide-rs="2" data-autoplay="true" data-nav="false" data-dots="false" data-space="0" data-loop="true" data-speed="800">
+                        {% if products_recent %}
+                        {% for p in products_recent %}
+                        <!-- Blog Entry #1 -->
+                        <div class="blog-entry">
+
+                            <div class="entry--content">
+                               
+                                <div class="entry--title">
+                                    <a href="{% url 'product_details'  p.id %}"><h4>{{ p.title }}</a></h4>
+                                </div>
+                                <div class="entry--img">
+                                    <a href="{% url 'product_details'  p.id %}">
+                                        <img src="{{ p.image_main.url }}" style="height:200px;" alt="image"/>
+                                    </a>
+                                </div>
+                                <div class="entry--bio">
+                                {{ p.caption }} ...
+                                </div>
+                            </div>
+                            <!-- .entry-content end -->
+                        </div>
+                        <!-- .blog-entry end -->
+                        {% endfor %}
+                        {% endif %}
+
+                    </div>
+                    <!-- .carousel end -->
+                </div>
+                <!-- .col-md-6 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #blog end -->
+    {% endif %}
+{% endblock content %}

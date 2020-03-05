@@ -1,0 +1,408 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+
+<head>
+<!-- Document Meta
+    ============================================= -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--IE Compatibility Meta-->
+<meta name="author" content="Ali Baghban"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="(Ali Baghban | 09335138159)">
+<link href="{% static 'assets/images/favicon/favicon.png' %}" rel="icon">
+
+<!-- Fonts
+    ============================================= -->
+<link href='http://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,700,900%7CRuthie%7CAbril+Fatface' rel='stylesheet' type='text/css'>
+<link href='http://www.fontonline.ir/css/BNazanin.css' rel='stylesheet' type='text/css'>
+<link href='http://www.fontonline.ir/css/BYekan.css' rel='stylesheet' type='text/css'>
+
+
+<!-- Stylesheets
+    ============================================= -->
+<link href="{% static 'assets/css/external.css' %}" rel="stylesheet">
+<link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+<link type="text/css" href="{% static 'assets/css/style-rtl.css' %}"  rel="stylesheet"/>
+
+<!-- RS5.0 Main Stylesheet -->
+<link rel="stylesheet" type="text/css" href="{% static 'assets/revolution/css/settings.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/revolution/css/layers.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/revolution/css/navigation.css' %}"> 
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+      <script src="{% static 'assets/js/html5shiv.js' %}"></script>
+      <script src="{% static 'assets/js/respond.min.js' %}"></script>
+    <![endif]-->
+
+
+
+<title>
+{% block title %}
+{% if '/' == request.path %}
+صفحه اصلی
+{% elif 'rules' in request.path %}
+قوانین وبسایت
+{% elif 'news' in request.path %}
+خبرنامه
+{% elif 'news_details' in request.path %}
+خبرنامه
+{% elif 'products' in request.path %}
+محصولات ما
+{% elif 'card' in request.path %}
+سبدخرید شما
+{% endif %}
+{% endblock title %}
+</title>
+</head>
+<body>
+
+
+<div class="modal fade"  role="dialog" id="exampleModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius: 20px">
+            <div class="modal-header" style="background-color: #bb9356 ; border-top-left-radius: 20px ; border-top-right-radius: 20px">
+                <button type="button" class="close" data-dismiss="modal" style="right: 95%" aria-label="Close"><i class="fa fa-times" style="color: black"></i></button>
+                <h5 class="modal-title"  id="exampleModalLabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ورود</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row reservation">
+                    <div class="col-xs-8 col-sm-8 col-md-12">
+                        <form action="{% url 'login' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group" style="padding: 10px">
+                                <br>
+                                <label for="exampleInputEmail1" style="color: black">نام کاربری</label>
+                                <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="width: 80% ; height: 30px" placeholder="نام کاربری خود را وارد کنید">
+                                <label for="exampleInputPassword1" style="color: black">رمز عبور</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" style="width: 80% ; height: 30px" placeholder="رمز عبور خود را وارد کنید">
+                                <button type="button" style="background-color: rgba(169,104,0,0.001) ; border-color: rgba(169,104,0,0.001)" data-toggle="modal" data-target=".bd-example-modal-lg" data-dismiss="modal">ثبت نام نکرده اید؟ برای ثبت نام کلیک کنید</button>
+                            </div>
+                            <button type="submit" class="btn btn-danger" style="text-align: center ; margin: 0 auto ; border-radius: 20px ; right: 31%">ورود</button>
+                            <br>
+                            <br>
+                        </form>
+                    </div>
+                    <!-- .col-md-12 end -->
+                </div>
+                <!-- .row end -->
+
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade bd-example-modal-lg"   role="dialog" style="margin: 0 auto " aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg col-lg-12" role="document" style="margin: 0 auto">
+        <div class="modal-content" style="border-radius: 20px">
+            <div class="modal-header" style="background-color: #bb9356 ; border-top-left-radius: 20px ; border-top-right-radius: 20px ;">
+                <button type="button" class="close" data-dismiss="modal" style="right: 95%" aria-label="Close"><i class="fa fa-times" style="color: black"></i></button>
+                <h5 class="modal-title"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ثبت نام</h5>
+            </div>
+
+            <div class="modal-body" style="background: white">
+                <br>
+                <form action="{% url 'register' %}" method="post">
+                     {% csrf_token %}
+                    
+                        <div class="modal-content" >
+                         <div class="form-group">
+                         <br>
+                            <div class="col-lg-6">
+                                <label for="name" style="color: black">نام </label>
+                                <input type="text" name="firstname" class="form-control" id="name"  style="width: 100% ; height: 30px" placeholder="نام  خود را وارد کنید">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="lastname" style="color: black">نام خانوادگی</label>
+                                <input type="text" name="lastname" class="form-control" id="lastname"  style="width: 100% ; height: 30px" placeholder="نام خانوادگی خود را وارد کنید">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="email" style="color: black">ایمیل</label>
+                                <input type="email" name="email" class="form-control" id="email"  style="width: 100% ; height: 30px" placeholder="ایمبل خود را وارد کنید">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="username" style="color: black">نام کاربری</label>
+                                <input type="text" name="username" class="form-control" id="username" style="width: 100% ; height: 30px" placeholder="نام کاربری برای خود وارد کنید">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="phone" style="color: black">شماره تلفن</label>
+                                <input type="phone" name="phone" class="form-control" id="phone"  style="width: 100% ; height: 30px" placeholder="شماره تلفن خود را وارد کنید">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="address" style="color: black">آدرس</label>
+                                <textarea name="address" style="width: 100% ;"class="form-control" id="address" rows="2"></textarea>
+                            </div>
+                            
+                            <div class="col-lg-6">
+                                <label for="password" style="color: black">رمز عبور</label>
+                                <input type="password" name="password" class="form-control" id="pass" style="width: 100% ; height: 30px" placeholder="رمز خود را وارد کنید">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="address" style="color: black">تکرار رمز عبور</label>
+                                <input type="password" name="repassword" class="form-control" id="repeatpass" style="width: 100% ; height: 30px" placeholder="رمز را مجدد وارد کنید">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-danger" style="text-align: center ; margin: 0 auto ; border-radius: 10px ; right: 31%">ثبت نام</button>
+                        <br>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+<div class="preloader">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="wrapper clearfix">
+<header id="navbar-spy" class="header header-1 header-transparent header-fixed">
+    <nav id="primary-menu" class="navbar navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">ناوبری</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+                <a class="logo" href="{% url 'index' %}">
+					<img class="logo-light" src="{% static 'assets/images/logo/logo-light.png' %}" alt="Logo" draggable="false">
+					<img class="logo-dark" src="{% static 'assets/images/logo/logo-dark.png' %}" alt=" Logo" draggable="false">
+				</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
+                <ul class="nav navbar-nav nav-pos-right navbar-left">
+                    <!-- Home Menu -->
+<li class="active">
+    <a class="menu-item" href="{% url 'index' %}">صفحه اصلی</a>
+</li>
+
+<!-- About Menu -->
+
+<!-- li end -->
+
+
+<li>
+    <a class="menu-item" href="{% url 'rules' %}">قوانین وبسایت</a>
+</li>
+
+<li>
+    <a class="menu-item" href="{% url 'news' %}">وبلاگ خبری</a>
+</li>
+
+
+<!-- shop Menu -->
+<li>
+    <a href="{% url 'products' %}" class="menu-item">فروشگاه آنلاین</a>
+</li>
+<!-- li end -->
+
+
+                <!-- Module Cart -->
+{% if user.is_authenticated %}
+<div class="module module-cart pull-left">
+    <div class="module-icon cart-icon">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="title">بیشتر</span>
+    </div>
+    
+    <div class="module-content module-box cart-box">
+        
+        <div class="clearfix">
+        </div>
+        <div class="cart--control">
+        
+            <a class="btn btn--primary btn--block btn--rounded mb-10" href="{% url 'card' %}">مشاهده سبد خرید</a>
+            <a class="btn btn--white btn--bordered btn--rounded btn--block" href="{% url 'dashboard' %}?option=1">ناحیه کاربری </a>
+            <a class="btn btn--white btn--bordered btn--rounded btn--block" href="{% url 'logout' %}">خروج از حساب</a>
+        
+            
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="module module-cart pull-left">
+    <div class="module-icon cart-icon">
+        <i class="fa fa-shopping-cart"></i>
+        <span class="title">سبد خرید</span>
+        <label class="module-label">!</label>
+    </div>
+    
+    <div class="module-content module-box cart-box">
+        
+        <div class="clearfix">
+        </div>
+        <div class="cart--control">
+            <a class="btn btn--primary btn--block btn--rounded mb-10" data-toggle="modal" data-target="#exampleModal"> لطفا ابتدا وارد شوید</a>
+        </div>
+    </div>
+</div> 
+
+{% endif %}
+<!-- .module-cart end -->
+                <!-- Module Search -->
+<div class="module module-search pull-left">
+    <div class="module-icon search-icon">
+        <i class="fa fa-search"></i>
+        <span class="title">جستجو</span>
+    </div>
+    <div class="module-content module-fullscreen module--search-box">
+        <div class="pos-vertical-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                        <form class="form-search" action="{% url 'news' %}" method='POST'>
+                        {% csrf_token %}
+                            <input type="text" class="form-control" placeholder="عبارت موردنظر را تایپ کرده و Enter را بزنید">
+                            <button class="btn" type="button"><i class="fa fa-search"></i></button>
+                        </form>
+                        <!-- .form-search end -->
+                    </div>
+                    <!-- .col-md-8 end -->
+                </div>
+                <!-- .row end -->
+            </div>
+            <!-- .container end -->
+        </div>
+        <a class="module-cancel" href="#"><i class="fa fa-times"></i></a>
+    </div>
+</div>
+<!-- .module-search end -->
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+</header>
+{% block content %}
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+<!-- footer#1
+============================================= -->
+<footer id="footer" class="footer footer-1 text-center">
+    <div class="divider--shape-dark"></div>
+    <!-- Widget Section
+	============================================= -->
+    <div class="footer--widget text--center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="footer--widget-content">
+                        <h3>شبکه های اجتماعی</h3>
+                        <div class="footer--social-icons">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                        </div>
+                        <!-- .social-icons end -->
+                    </div>
+                </div>
+                <!-- .col-md-4 end -->
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="footer--widget-content">
+                        <img class="mb-20" src="{% static 'assets/images/logo/logo-light.png' %}" alt="logo">
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
+                    </div>
+                </div>
+                <!-- .col-md-3 end -->
+
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="footer--widget-content">
+                        <h3>شبکه های اجتماعی</h3>
+                        <div class="footer--social-icons">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                        </div>
+                        <!-- .social-icons end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .container end -->
+    </div>
+    <!-- .footer-widget end -->
+    <!-- Copyrights
+	============================================= -->
+    <div class="footer--copyright text-center">
+        <div class="divider--shape-dark2"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="contact-info">
+                        <span>ایران، تهران</span> -
+                        <span>00989100366857</span> -
+                        <span>admin@alibaghban.ir</span>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <span>&copy; ۲۰۲۰، ویرایش توسط </span> <a href="#">Ali Baghban & Ali Ghasemi</a>
+                </div>
+            </div>
+        </div>
+        <!-- .container end -->
+    </div>
+    <!-- .footer-copyright end -->
+</footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="{% static 'assets/js/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'assets/js/plugins.js' %}"></script>
+<script src="{% static 'assets/js/functions.js' %}"></script>
+<!-- RS5.0 Core JS Files -->
+<script src="{% static 'assets/revolution/js/jquery.themepunch.tools.min-rev=5.0.js' %}"></script>
+<script src="{% static 'assets/revolution/js/jquery.themepunch.revolution.min-rev=5.0.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+<script src="{% static 'assets/revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+<!-- RS Configration JS Files -->
+<script src="{% static 'assets/js/rsconfig.js' %}"></script>
+</body>
+
+</html>
+

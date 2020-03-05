@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Hero Section
+    ====================================== -->
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/10.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--subtitle">ورود به سایت</div>
+                            <div class="title--heading">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li class="active">ورود به سایت</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+
+<section id="menuGrid">
+        <div class="container" style="margin: 0 auto ; text-align: center">
+            <div class="row" style="text-align: center ; margin: 0 auto ;">
+                <div class="col-lg-12 col-md-10 col-sm-12" style="background:rgb(255, 230, 230); color: black ;  border-radius: 20px ; text-align: center ; margin: 0 auto ;">
+                    <div class="card" style="margin: 0 auto">
+                        <article class="card-body" style="text-align: right; direction: rtl ; margin: 0 auto"><br>
+                            <h4 class="card-title mb-4 mt-1" style="text-align: center">احراز هویت</h4>
+                            <hr>
+                            <form action="{% url 'login' %}" method="post">
+                                {% csrf_token %}
+                                <p align='center' >
+                                <div class="form-group ">
+                                    <div class="col-lg-6">
+                                        <label> نام کاربری </label>
+                                        <input name="username" class="form-control" style="width: 70%; color:black;" placeholder="نام کاربری هود را وارد کنید" type="text">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label> رمزعبور </label>
+                                        <input name="password" class="form-control" style="width: 70%" placeholder="رمزعبور خود را وارد کیند" type="password">
+                                    </div>
+                                </div> <!-- form-group// -->
+                                
+                                <div class="form-group" style="text-align: center ; margin: 0 auto">
+                                    <button type="submit" class="btn btn-info btn-block" style="border-radius: 10px ; text-align: center ; margin: 0 auto"> ورود </button>
+                                <br><a href="{% url 'register' %}">نام نویسی</a>
+                                </div> <!-- form-group// -->
+                                </p>
+                                <br>
+                            </form>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+</section>
+{% endblock %}

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}داشبورد{% endblock %}
+{% block content %}
+<!-- Hero Section
+    ====================================== -->
+    
+
+
+    
+
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/10.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--subtitle">خوش آمدید</div>
+                            <div class="title--heading">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li class="active">داشبورد</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- Menu Grid
+    ============================================= -->
+    <section id="menuGrid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <form method="get" action="{% url 'dashboard' %}">
+                        <div class="form-group">
+                            <select class="form-control" name="option">
+                                <option value= '1' >سابقه ی خریدها</option>
+                                <option value= '3' >تغییر اطلاعات کاربری</option>
+                                <option value= '2' > خروج از پنل</option>
+                            </select>
+                        </div>
+                    
+                </div>
+                <div class="col-lg-4" style="margin: 0 auto ; text-align: center">
+                    <button type="submit" class="btn btn-info" style="border-radius: 5px ; margin: 0 auto ; text-align: center">انتخاب</button>
+                    <br>
+                </div>
+                </form>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-12">
+                {% if orders %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" style="text-align: right ; direction: rtl">
+                        <thead>
+                        <tr>
+                            <th scope="col">تاریخ سفارش</th>
+                            <th scope="col">وضعیت پرداخت</th>
+                            <th scope="col">وضعیت مرسوله</th>
+                            <th scope="col">بیشتر</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            
+                            <td>{{ order.register_time }}</td>
+                            <td>{% if order.status %}پرداخت شده {% else %} پرداخت نشده {% endif %}</td>
+                            <td>{% if order.delivery %}در مسیر رسیدن به شما {% else %}درحال پردازش {% endif %}</td>
+                            <td style="margin: 0 auto ; text-align: center">
+                            <a class="btn" href="{% url 'order_details' order.id %}" >
+                            <button type="button" class="btn btn-outline-light btn-sm" style="border-radius: 5px ; width: auto"> &#9989; </button>
+                            </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        
+    </section>
+
+ 
+
+ 
+{% endblock %}

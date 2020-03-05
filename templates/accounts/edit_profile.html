@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}داشبورد{% endblock %}
+{% block content %}
+<!-- Hero Section
+    ====================================== -->
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/10.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--subtitle">خوش آمدید</div>
+                            <div class="title--heading">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li class="active">داشبورد</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- Menu Grid
+    ============================================= -->
+    <section id="menuGrid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <form method="get" action="{% url 'dashboard' %}">
+                        <div class="form-group">
+                            <select class="form-control" name="option">
+                                <option value= '1' >سابقه ی خریدها</option>
+	                            <option value= '2' > خروج از پنل</option>
+                                <option value= '3' selected >تغییر اطلاعات کاربری</option>
+                            </select>
+                        </div>
+                    
+                </div>
+                <div class="col-lg-4" style="margin: 0 auto ; text-align: center">
+                    <button type="submit" class="btn btn-info" style="border-radius: 5px ; margin: 0 auto ; text-align: center">انتخاب</button>
+                    <br>
+                </div>
+                </form>
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-lg-12">
+                {% if user %}
+                <form action="{% url 'edit_profile' %}" method="POST" >
+                {% csrf_token %}
+                    <div class="form-group ">
+                                    <div class="col-lg-6">
+                                        <label>نام </label>
+                                        <input name="firstname" class="form-control" style="width: 70%; color:black;" value="{{ user.first_name }}" type="text">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>نام خانوادگی</label>
+                                        <input name="lastname" class="form-control" style="width: 70%" value="{{ user.last_name }}" type="text">
+                                    </div>
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label>ایمیل خود را وارد کنید</label>
+                                        <input name="email" class="form-control" style="width: 70%" value="{{ user.email }}" type="email">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>نام کاربری</label>
+                                        <input name="username" class="form-control" style="width: 70%" value="{{ user.username }}" type="text" disabled >
+                                    </div>
+                                </div> <!-- form-group// -->
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label>شماره موبایل</label>
+                                        <input name="phone" class="form-control" style="width: 70%" value="{{ user.phone }}" type="text">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>ادرس خود را وارد نمایید</label>
+                                        <input name="address" class="form-control" style="width: 70%" value="{{ user.address }}" type="text">
+                                    </div>
+                                </div> <!-- form-group// -->
+                                
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label>رمز خود را وارد نمایید</label>
+                                        <input name="password"class="form-control" style="width: 70%" value="last_passX" type="password">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label>رمز خود را تکرار نمایید</label>
+                                        <input name="repassword"class="form-control" style="width: 70%" value="last_passX" type="password">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="text-align: center ; margin: 0 auto">
+                                    <button type="submit" name="edit_me" class="btn btn-info btn-block" style="border-radius: 10px ; text-align: center ; margin: 0 auto">  اعمال تغییرات </button>
+                                <br><a href="{% url 'dashboard' %}">انصراف</a>
+                        </div> <!-- form-group// -->
+                        </form>
+                    {% endif %}        
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        
+    </section>
+
+ 
+
+ 
+{% endblock %}

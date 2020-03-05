@@ -1,0 +1,89 @@
+ {% extends 'base.html' %}
+ {% load static %}
+ {% block content %}
+
+<!-- Hero Section
+    ====================================== -->
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/2.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--subtitle">جزییات مرسوله</div>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li><a href="{% url 'dashboard' %}">داشبورد</a></li>
+                            <li class="active">جزییات سفارش شما</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+<section id="menuGrid">
+        <div class="container">
+            
+            <br>
+
+            <div class="row">
+                <div class="col-lg-12">
+                {% if order %}
+                <div class="table-responsive">
+                    <table class="table table-bordered" style="text-align: right ; direction: rtl">
+                        <thead>
+                        <tr>
+                            
+                            <th scope="col">تاریخ سفارش</th>
+                            <th scope="col">وضعیت پرداخت</th>
+                            <th scope="col"> کد رهگیری داخلی</th>
+                            <th scope="col">نوع ارسال</th>
+                            <th scope="col">وضعیت مرسوله</th>
+                            <th scope="col">کد رهگیری مرسوله</th>
+                            <th scope="col">جزییات</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        <tr>
+                            <td>{{ order.register_time }}</td>
+                            <td>{% if order.status %}پرداخت شده {% else %} پرداخت نشده {% endif %}</td>
+                            <td>{{ order.bill_id }}</td>
+                            <td>{{ order.deliver_with }}</td>
+                            <td>{% if order.delivery %}در مسیر رسیدن به شما {% else %}درحال پردازش {% endif %}</td>
+                            <td>{{ order.post_id }}</td>
+                            <td>{{ order.products_ordered }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    {% endif %}
+                    <p align="center">
+                    <a href="{% url 'dashboard' %}">بازگشت</a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        
+    </section>
+
+ 
+    
+    {% endblock %}

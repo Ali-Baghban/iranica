@@ -1,0 +1,25 @@
+#header {
+    background: #10284e;
+    color: #ffffff;
+}
+#branding h1{
+    color: #ffffff;
+    
+}
+.module h2, .module caption, .inline-group h2 {
+    background:#30caa0; ;
+}
+div.breadcrumbs{
+    background: #30caa0;
+}
+.button, input[type=submit], input[type=button], .submit-row input, a.button{
+    background: #10284e;
+    color: #ffffff;
+}
+body.login {
+    background: #30caa0;
+}
+.dashboard #content {
+    width: 70%;
+}
+ 

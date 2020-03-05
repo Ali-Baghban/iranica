@@ -1,0 +1,92 @@
+ {% extends 'base.html' %}
+ {% load static %}
+ {% block content %}
+
+<!-- Hero Section
+    ====================================== -->
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/3.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--subtitle">از خرید شما سپاس گزاریم</div>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li class="active">پرداخت نهایی</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- Menu Grid
+    ============================================= -->
+    <section id="menuGrid">
+        <div class="container">
+            <div class="row" style="text-align: center ; margin: 0 auto">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card" style="width: 100%">
+                        <ul class="list-group list-group-flush">
+                        {% if success %}
+                            <li class="list-group-item">هزینه ی محصولات : {{ products_cost }} تومان</li>
+                            <li class="list-group-item">هزینه ارسال : {{ delivery_cost }} تومان</li>
+                            <li class="list-group-item">تعداد انواع سفارش : {{ products_type_count }}</li>
+                            <li class="list-group-item">جمع : {{ total_cost }} تومان</li>
+                            {% else %}
+                            <li class="list-group-item">پرداخت با خطا روبه رو شده است لطفا مجدد تلاش کنید</li>
+                            <li class="list-group-item">در صورت کسر هزینه از حساب شما تا 72 ساعت به حساب شما برگشت داده خواهد شد</li>
+                            {% endif %}
+                            
+                            <li class="list-group-item" style="text-align: center ; margin: 0 auto">
+                                <a href="{% url 'card' %}" class="btn btn-danger" style="border-radius: 7px ; font-size: 10px">بازگشت به سبد خرید</a>
+                            </li>
+                            
+                            <li class="list-group-item" style="text-align: center ; margin: 0 auto">
+                            <div class="spinner-grow text-muted"></div>
+                               
+
+                                <script type="text/javascript">
+                                    var count = 10;
+                                    var redirect = "{% url 'dashboard' %}";
+
+                                    function countDown(){
+                                        var timer = document.getElementById("timer");
+                                        if(count > 0){
+                                            count--;
+                                            timer.innerHTML ="<p>" +" رفتن به پنل مشتری تا " + count + "ثانیه دیگر " + "</p>";
+                                            //delay for 1000ms
+                                            setTimeout("countDown()", 1000);
+                                        }else{
+                                            window.location.href = redirect;
+                                        }
+                                    }
+                                </script>
+
+                                <br>
+
+                                <span id="timer">
+                                <script type="text/javascript">countDown();</script>
+                            </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+        </section>
+    
+    {% endblock %}

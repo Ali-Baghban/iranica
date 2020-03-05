@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<!-- Page Title #1
+============================================= -->
+
+
+<section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+    <div class="bg-section">
+        <img src="{% static 'assets/images/page-title/2.jpg' %}" alt="Background" />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="title title-1 text-center">
+                    <div class="title--content">
+                        <div class="title--subtitle">{% if news %}{{ news.title }}{% endif %}</div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ol class="breadcrumb">
+                        <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                        <li><a href="{% url 'news' %}">خبرها</a></li>
+                        <li class="active">خبر</li>
+                    </ol>
+                    <div class="divider--shape-1down"></div>
+                </div>
+                <!-- .title end -->
+            </div>
+            <!-- .col-md-12 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+<!-- #page-title end -->
+{% if news %}
+<!-- banner#7
+============================================= -->
+<section id="banner7" class="banner banner-1 text-center pb-90">
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="banner-panel">
+                    <div class="banner--img">
+                        <img src="{{ news.image_main.url }}" alt="banner img" class="img-responsive">
+                    </div>
+                </div>
+                <!-- .banner-panel end -->
+            </div>
+            <!-- .col-md-4 end -->
+
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="banner-panel">
+                    <div class="banner--img">
+                        <img src="{{ news.image_1.url }}" alt="banner img" class="img-responsive">
+                    </div>
+                </div>
+                <!-- .banner-panel end -->
+            </div>
+            <!-- .col-md-4 end -->
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                <div class="heading heading-1 text--center mb-50">
+                    <h2 class="heading--title">{{ news.title }}</h2>
+                    <div class="divider--shape-4"></div>
+                    <p class="heading--desc">{{ news.body }}</p>
+                </div>
+                <!-- .heading end -->
+            </div>
+            <!-- .col-md-6 end -->
+        </div>
+        <!-- .row end -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+               
+                <div class="signiture--img mt-10">
+                    <img src="{% static 'assets/images/heading/Signiture.png' %}" alt="Signiture img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- .container end -->
+</section>
+<!-- #banner7 end -->
+{% endif %}
+
+<!-- Blog Carousel
+============================================= -->
+<section id="blog" class="blog blog-carousel pb-100">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                <div class="heading heading-1 mb-50 text--center">
+                    <p class="heading--subtitle">مطالب مهم</p>
+                    <div class="divider--shape-4"></div>
+                </div>
+            </div>
+            <!-- .col-md-8 end -->
+        </div>
+        <!-- .row end -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="carousel" data-slide="3" data-slide-rs="2" data-autoplay="true" data-nav="false" data-dots="false" data-space="0" data-loop="true" data-speed="800">
+{% if news_important %}
+{% for news in news_important %}
+                    <!-- Blog Entry #1 -->
+                    <div class="blog-entry">
+
+                        <div class="entry--content">
+                            
+                            <div class="entry--title">
+                                <h4><a href="{% url 'news'%}{{ news.id}}">{{ news.title}}</a></h4>
+                            </div>
+                            <div class="entry--img">
+                                <a href="{% url 'news'%}{{ news.id}}">
+								<img src="{{ news.image_main.url }}" alt="entry image"/>
+							
+                            </div>
+                            <div class="entry--bio">
+                                {{ news.body}} ...
+                            </div>
+                            </a>
+                        </div>
+                        <!-- .entry-content end -->
+                    </div>
+                    <!-- .blog-entry end -->
+{% endfor %}
+{% endif %}
+                </div>
+                <!-- .carousel end -->
+            </div>
+            <!-- .col-md-6 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+<!-- #blog end -->
+{% endblock content %}

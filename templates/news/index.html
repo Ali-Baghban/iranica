@@ -1,0 +1,72 @@
+ {% extends 'base.html' %}
+ {% load static %}
+ {% block content %}
+
+    <!-- Hero Section
+    ====================================== -->
+    <section id="page-title" class="page-title bg-overlay bg-parallax bg-overlay-gradient">
+        <div class="bg-section">
+            <img src="{% static 'assets/images/page-title/9.jpg' %}" alt="Background" />
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="title title-1 text-center">
+                        <div class="title--content">
+                            <div class="title--subtitle"></div>
+                            <div class="title--heading">
+                                <h1> خبرنامه </h1>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ol class="breadcrumb">
+                            <li><a href="{% url 'index' %}">صفحه اصلی</a></li>
+                            <li class="active">خبرنامه</li>
+                        </ol>
+                        <div class="divider--shape-1down"></div>
+                    </div>
+                    <!-- .title end -->
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- Menu Grid
+    ============================================= -->
+    <section id="menuGrid">
+        
+        <br>
+        <br>
+        {% if news_show %}
+        {% for news in news_show %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4>{{ news.title }}</h4>
+                    <hr>
+                    <p>
+                    {{ news.body }}
+                    </p>
+                    <a type="button" href="{% url 'news_details' news.id %}" class="btn btn-group btn-light" style="border-radius: 20px ; border-color: #0b0b0b ">ادامه مطلب</a>
+                    <hr>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        {% endfor %}
+        {% endif %}
+        <!-- .container end -->
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <!-- .container end -->
+    </section>
+    <!-- #menuGrid end -->
+
+
+ {% endblock content %}
